@@ -89,7 +89,10 @@ RegisterNetEvent('rj-gunrepairs:client:targetted', function()
                     })
                 end,
                 event = 'rj-gunrepairs:client:repair',
-                args = {type = 'repair'}
+                args = {type = 'repair'},
+                metadata = {
+                    {label = 'Price', value = '$'..Config.Cost}
+                }
             },
             {
                 title = 'Get weapon',
