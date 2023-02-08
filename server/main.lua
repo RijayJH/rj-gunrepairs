@@ -1,5 +1,5 @@
 local ox_inventory = exports.ox_inventory
-local active = false
+active = false
 local pedid
 local WeaponData
 
@@ -8,9 +8,10 @@ RegisterNetEvent('rj-gunrepairs:server:repair', function(gun)
     local minute = 60 * 1000
     local time = Config.time * minute
     if ox_inventory:RemoveItem(src, 'money', Config.Cost) then
-        if ox_inventory:RemoveItem(src, gun.name, 1) then
+        if ox_inventory:RemoveItem(src, gun.name, 1, gun.metadata, gun.slot) then
             active = true
-            SetTimeout(10000, function()
+            -- TriggerClientEvent('rj-gunrepairs:client:fixhand', src)
+            SetTimeout(time, function()
                 pedid = src
                 WeaponData = gun 
             end)
@@ -35,7 +36,7 @@ end)
 RegisterNetEvent('rj-gunrepairs:server:getitem', function()
     if WeaponData and pedid then
         WeaponData.metadata.durability = 100
-        exports.ox_inventory:AddItem(pedid, WeaponData.name, 1, WeaponData.metadata)
+        exports.ox_inventory:AddItem(pedid, WeaponData.name, 1, { serial = WeaponData.metadata.serial, durability = 100, ammo = WeaponData.metadata.ammo, registered = WeaponData.metadata.registered, components = WeaponData.metadata.components })
         WeaponData = nil
         pedid = nil
         active = false

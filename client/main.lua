@@ -62,13 +62,9 @@ CreateThread(function()
 end)
 
 RegisterNetEvent('rj-gunrepairs:client:targetted', function()
-    lib.callback('rj-gunrepairs:callback:active', function(bool)
-        active = bool
-        print(bool)
-    end)
-    lib.callback('rj-gunrepairs:callback:getped', function(bool)
-        itsme = bool
-    end)
+    active = lib.callback.await('rj-gunrepairs:callback:active', false)
+    itsme = lib.callback.await('rj-gunrepairs:callback:getped', false)
+    Wait(1000)
     lib.registerContext({
         id = 'gunrepairmenu',
         title = 'Gun Repairs',
@@ -135,8 +131,12 @@ RegisterNetEvent('rj-gunrepairs:client:repair', function(data)
     if data.type == 'repair' then
         local gun = exports.ox_inventory:getCurrentWeapon()
         if gun then
+            TriggerEvent('ox_inventory:disarm')
+            Wait(1500)
             TriggerServerEvent('rj-gunrepairs:server:repair', gun)
-            print(json.encode(gun, {indent=true}))
+            if Config.Debug then
+                print(json.encode(gun, {indent=true}))
+            end
         end
     elseif data.type == 'get' then 
         TriggerServerEvent('rj-gunrepairs:server:getitem')
@@ -144,4 +144,9 @@ RegisterNetEvent('rj-gunrepairs:client:repair', function(data)
         itsme = false
     end      
 end)
+
+-- RegisterNetEvent('rj-gunrepairs:client:fixhand', function()
+--     Wait(2000)
+--     SetCurrentPedWeapon(source, `WEAPON_UNARMED`, true)
+-- end)
 
