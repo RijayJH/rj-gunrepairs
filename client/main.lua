@@ -84,7 +84,7 @@ RegisterNetEvent('rj-gunrepairs:client:targetted', function()
                 onSelect = function(args)
                     lib.notify({
                         title = 'Thankyou',
-                        description = 'Thankyou for using my services, this will take around 5 minutes of your time, Please wait nearby!',
+                        description = 'Thankyou for using my services, this will take around '..tostring(Config.time)..' minutes of your time, Please wait nearby!',
                         type = 'success'
                     })
                 end,
