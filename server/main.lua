@@ -13,7 +13,8 @@ RegisterNetEvent('rj-gunrepairs:server:repair', function(gun)
             -- TriggerClientEvent('rj-gunrepairs:client:fixhand', src)
             SetTimeout(time, function()
                 pedid = src
-                WeaponData = gun 
+                WeaponData = gun
+                --This is where you add phone email system or whtver needed
             end)
         end
     else
