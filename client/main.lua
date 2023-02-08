@@ -64,6 +64,7 @@ end)
 RegisterNetEvent('rj-gunrepairs:client:targetted', function()
     lib.callback('rj-gunrepairs:callback:active', function(bool)
         active = bool
+        print(bool)
     end)
     lib.callback('rj-gunrepairs:callback:getped', function(bool)
         itsme = bool

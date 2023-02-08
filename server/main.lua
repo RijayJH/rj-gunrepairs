@@ -5,16 +5,18 @@ local WeaponData
 
 RegisterNetEvent('rj-gunrepairs:server:repair', function(gun)
     local src = source
+    local minute = 60 * 1000
+    local time = Config.time * minute
     if ox_inventory:RemoveItem(src, 'money', Config.Cost) then
         if ox_inventory:RemoveItem(src, gun.name, 1) then
             active = true
-            SetTimeout(Config.time, function()
+            SetTimeout(10000, function()
                 pedid = src
                 WeaponData = gun 
             end)
         end
     else
-        TriggerClientEvent('rj-gunrepairs:client:nomoney')
+        TriggerClientEvent('rj-gunrepairs:client:nomoney', src)
     end
 end)
 
@@ -23,7 +25,7 @@ lib.callback.register('rj-gunrepairs:callback:active', function()
 end)
 
 lib.callback.register('rj-gunrepairs:callback:getped', function(source)
-    if active and pedid = source then
+    if active and pedid == source then
         return true
     else
         return false
@@ -39,4 +41,5 @@ RegisterNetEvent('rj-gunrepairs:server:getitem', function()
         active = false
     end
 end)
+
 
