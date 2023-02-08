@@ -64,7 +64,7 @@ end)
 RegisterNetEvent('rj-gunrepairs:client:targetted', function()
     active = lib.callback.await('rj-gunrepairs:callback:active', false)
     itsme = lib.callback.await('rj-gunrepairs:callback:getped', false)
-    Wait(1000)
+    Wait(250)
     lib.registerContext({
         id = 'gunrepairmenu',
         title = 'Gun Repairs',
