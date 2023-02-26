@@ -11,3 +11,6 @@
 - Drop resource into your server directory and add `ensure rj-gunrepairs` to your `server.cfg`
 - Setup your Config file for the gun repairs
 - Have Fun
+
+## Showcase
+- [Link](https://youtu.be/LVRqSc1lXFM)
